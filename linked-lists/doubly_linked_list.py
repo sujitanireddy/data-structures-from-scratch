@@ -30,7 +30,43 @@ class doublyNode():
                 linked_list.append(str(curr.val))
                 curr = curr.next
             return ' <-> '.join(linked_list)
-
         
+    
+    #Time Complexity: O(1)
+    def add_to_beginning(node, head, tail):
 
+        if head is None:
+            return "No head to attach the node"
+
+        head.prev = node
+        node.next = head
+        node.prev = None
+        head = node
+
+        return doublyNode.display(head=head, tail=None)
+    
+    #Time Complexity: O(1); if tail is provided if not it's O(n)
+    def add_to_end(node, head, tail):
         
+        if head and not tail:
+            curr = head
+            while curr:
+                tail = curr
+                curr = curr.next
+            
+            tail.next = node
+            node.next = None
+            node.prev = tail
+            tail = node
+        
+        if tail:
+
+            tail.next = node
+            node.next = None
+            node.prev = tail
+            tail = node
+
+        return doublyNode.display(head=head, tail=tail)
+
+
+

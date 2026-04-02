@@ -23,4 +23,11 @@ class Test_DoublyLinkedListNode(unittest.TestCase):
         self.assertEqual(doublyNode.display(tail=self.Tail, head=None), '40 <-> 30 <-> 20 <-> 10')
         self.assertEqual(doublyNode.display(tail=self.Tail, head=self.Head), '10 <-> 20 <-> 30 <-> 40')
 
+    def test_add_to_beginning(self):
+        D = doublyNode(50)
+        self.assertEqual(doublyNode.add_to_beginning(head=self.Head, node=D, tail=None), '50 <-> 10 <-> 20 <-> 30 <-> 40')
+    
+    def test_add_to_end(self):
+        E = doublyNode(60)
+        self.assertEqual(doublyNode.add_to_end(head=self.Head, node=E, tail=self.Tail), '10 <-> 20 <-> 30 <-> 40 <-> 60')
 
