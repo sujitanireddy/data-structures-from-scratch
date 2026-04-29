@@ -48,6 +48,45 @@ class Heap:
         while i > 1 and self.heap[i] < self.heap[i//2]:
             self.heap[i], self.heap[i//2] = self.heap[i//2], self.heap[i]
             i = i // 2
+
+    def pop(self):
+
+        if len(self.heap) == 1:
+            return None
+
+        if len(self.heap) == 2:
+            return self.heap.pop()
+
+        minn = self.heap[1]
+       
+        #move last node to root
+        self.heap[1] = self.heap.pop()
+
+        i = 1
+
+        while 2 * i < len(self.heap): #while left child exists
+
+            #(2 * i) + 1 = right node, 2*i = left node
+            #if right node exists and it's less than left node and parent is less than right node then swap right
+            if (2 * i) + 1 < len(self.heap) and self.heap[(2 * i) + 1] < self.heap[(2*i)] and self.heap[i] > self.heap[(2 * i) + 1]:
+
+                self.heap[(2 * i) + 1], self.heap[i] = self.heap[i], self.heap[(2 * i) + 1]
+
+                i = (2 * i) + 1
+            
+            elif self.heap[i] > self.heap[2 * i]:
+
+                self.heap[2 * i], self.heap[i] = self.heap[i], self.heap[2 * i]
+
+                i = 2 * i
+            
+            else:
+                break
+    
+        return minn
+
+
+
     
     def __repr__(self):
         return str(self.heap)
@@ -87,6 +126,6 @@ A.push(8)
 A.push(9)
 A.push(10)
 A.push(-1)
-
+A.pop()
 
 print(A)
