@@ -40,20 +40,34 @@ class Heap:
         self.heap = [0] 
     
     def push(self, val):
-
         self.heap.append(val)
         i = len(self.heap) - 1
-
-        #percolate up
+        self.percolate_up(i)
+    
+    def percolate_up(self, i):
         while i > 1 and self.heap[i] < self.heap[i//2]:
             self.heap[i], self.heap[i//2] = self.heap[i//2], self.heap[i]
             i = i // 2
 
-    def pop(self):
+    def percolate_down(self, i):
+        while 2 * i < len(self.heap): #while left child exists
 
+            #(2 * i) + 1 = right node, 2*i = left node
+            #if right node exists and it's less than left node and parent is less than right node then swap right
+            if (2 * i) + 1 < len(self.heap) and self.heap[(2 * i) + 1] < self.heap[(2*i)] and self.heap[i] > self.heap[(2 * i) + 1]:
+                self.heap[(2 * i) + 1], self.heap[i] = self.heap[i], self.heap[(2 * i) + 1]
+                i = (2 * i) + 1
+            
+            elif self.heap[i] > self.heap[2 * i]:
+                self.heap[2 * i], self.heap[i] = self.heap[i], self.heap[2 * i]
+                i = 2 * i
+            
+            else:
+                break
+
+    def pop(self):
         if len(self.heap) == 1:
             return None
-
         if len(self.heap) == 2:
             return self.heap.pop()
 
@@ -61,66 +75,18 @@ class Heap:
        
         #move last node to root
         self.heap[1] = self.heap.pop()
-
-        i = 1
-
-        while 2 * i < len(self.heap): #while left child exists
-
-            #(2 * i) + 1 = right node, 2*i = left node
-            #if right node exists and it's less than left node and parent is less than right node then swap right
-            if (2 * i) + 1 < len(self.heap) and self.heap[(2 * i) + 1] < self.heap[(2*i)] and self.heap[i] > self.heap[(2 * i) + 1]:
-
-                self.heap[(2 * i) + 1], self.heap[i] = self.heap[i], self.heap[(2 * i) + 1]
-
-                i = (2 * i) + 1
-            
-            elif self.heap[i] > self.heap[2 * i]:
-
-                self.heap[2 * i], self.heap[i] = self.heap[i], self.heap[2 * i]
-
-                i = 2 * i
-            
-            else:
-                break
-    
+        self.percolate_down(1)
         return minn
     
     def heapify(self, arr):
-
         self.heap = [0] + arr #copy first element to last 
-
         curr = (len(self.heap) - 1) // 2 #half of the elements in a tree would not have children so we are eliminating them
-
         while curr > 0:
-
-            i = curr
-
-            while 2*i < len(self.heap): #while the left node exists
-
-                #if right node exists and left > right and parent > right = Swap right with parent
-
-                if (2*i) + 1 < len(self.heap) and self.heap[2*i] > self.heap[(2*i)+ 1] and self.heap[i] > self.heap[(2*i)+ 1]:
-
-                    self.heap[i], self.heap[(2*i)+ 1] = self.heap[(2*i)+ 1], self.heap[i]
-
-                    i = (2*i) + 1
-                
-                elif self.heap[(2*i)] < self.heap[i]:
-
-                    self.heap[i], self.heap[2*i] = self.heap[2 * i], self.heap[i]
-
-                    i = 2 * i
-                
-                else:
-                    break
-            
+            self.percolate_down(curr)
             curr -= 1
-
     
     def __repr__(self):
         return str(self.heap)
-
-
 
 
 
