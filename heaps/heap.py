@@ -84,25 +84,41 @@ class Heap:
                 break
     
         return minn
+    
+    def heapify(self, arr):
+
+        self.heap = [0] + arr #copy first element to last 
+
+        curr = (len(self.heap) - 1) // 2 #half of the elements in a tree would not have children so we are eliminating them
+
+        while curr > 0:
+
+            i = curr
+
+            while 2*i < len(self.heap): #while the left node exists
+
+                #if right node exists and left > right and parent > right = Swap right with parent
+
+                if (2*i) + 1 < len(self.heap) and self.heap[2*i] > self.heap[(2*i)+ 1] and self.heap[i] > self.heap[(2*i)+ 1]:
+
+                    self.heap[i], self.heap[(2*i)+ 1] = self.heap[(2*i)+ 1], self.heap[i]
+
+                    i = (2*i) + 1
+                
+                elif self.heap[(2*i)] < self.heap[i]:
+
+                    self.heap[i], self.heap[2*i] = self.heap[2 * i], self.heap[i]
+
+                    i = 2 * i
+                
+                else:
+                    break
+            
+            curr -= 1
 
     
     def __repr__(self):
         return str(self.heap)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -125,6 +141,8 @@ A.push(9)
 A.push(10)
 A.push(-1)
 
-A.pop()
+B = Heap()
+print(B)
+B.heapify([3, 1, 4, 1, 5, 9, 2, 6])
 
-print(A)
+print(B)
