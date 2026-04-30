@@ -85,8 +85,6 @@ class Heap:
     
         return minn
 
-
-
     
     def __repr__(self):
         return str(self.heap)
@@ -126,6 +124,7 @@ A.push(8)
 A.push(9)
 A.push(10)
 A.push(-1)
+
 A.pop()
 
 print(A)
