@@ -1,0 +1,42 @@
+#Building Binary Search Tree from Scratch
+
+from binary_tree import TreeNode
+
+def search_bst(node, target):
+    
+    if not node:
+        return False
+
+    if node.val == target:
+        return True
+
+    if node.val > target: 
+        return search_bst(node.left, target)
+    else:
+        return search_bst(node.right, target)
+
+
+
+#testing 
+
+# Binary Search Trees (BSTs)
+
+#       5
+#    1    8
+#  -1 3  7 9
+
+A2 = TreeNode(5)
+B2 = TreeNode(1)
+C2 = TreeNode(8)
+D2 = TreeNode(-1)
+E2 = TreeNode(3)
+F2 = TreeNode(7)
+G2 = TreeNode(9)
+
+A2.left, A2.right = B2, C2
+B2.left, B2.right = D2, E2
+C2.left, C2.right = F2, G2
+
+#print(A2)
+#TreeNode.recursive_inorder(A2)
+print(search_bst(A2, 100))

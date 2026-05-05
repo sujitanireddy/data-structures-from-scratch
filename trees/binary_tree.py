@@ -100,18 +100,6 @@ class TreeNode:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 #Testing
 A = TreeNode(1)
 B = TreeNode(2)
@@ -131,12 +119,11 @@ C.left = F
 #   4  5  10
 
 #print(A)
-
 #TreeNode.recursive_preorder(A)
 #TreeNode.recursive_inorder(A)
 #TreeNode.recursive_postorder(A)
 #TreeNode.iterative_preorder(A)
 #TreeNode.iterative_BFS(A)
-print(TreeNode.search(A, 5))
+#print(TreeNode.search(A, 5))
         
 
