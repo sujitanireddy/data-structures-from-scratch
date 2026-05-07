@@ -31,13 +31,12 @@ def find_min(root):
     while curr and curr.left:
         curr = curr.left
     return curr
+
 #Removing a node for a BST
 #TC: O(logn)
 def remove(root, val):
-
     if not root:
         return None
-
     if val > root.val:
         root.right = remove(root.right, val)
     elif val < root.val:
@@ -51,7 +50,6 @@ def remove(root, val):
             min_node = find_min(root.right)
             root.val = min_node.val
             root.right = remove(root.right, min_node.val)
-
     return root
 
 
