@@ -25,9 +25,38 @@ def insert(root ,val):
         root.left = insert(root.left, val)
     return root
 
+#Find min 
+def find_min(root):
+    curr = root
+    while curr and curr.left:
+        curr = curr.left
+    return curr
+#Removing a node for a BST
+#TC: O(logn)
+def remove(root, val):
+
+    if not root:
+        return None
+
+    if val > root.val:
+        root.right = remove(root.right, val)
+    elif val < root.val:
+        root.left = remove(root.left, val)
+    else:
+        if not root.right:
+            return root.left
+        elif not root.left:
+            return root.right
+        else:
+            min_node = find_min(root.right)
+            root.val = min_node.val
+            root.right = remove(root.right, min_node.val)
+
+    return root
+
+
 
 #testing 
-
 # Binary Search Trees (BSTs)
 
 #       5
